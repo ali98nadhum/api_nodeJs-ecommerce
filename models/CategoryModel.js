@@ -12,12 +12,8 @@ const CategorySchema = new mongoose.Schema(
     },
 
     image: {
-      type: Object,
-      required: [true, "Category image is required"],
-      default: {
-        url: "",
-        publicId: null,
-      },
+      url: { type: String },
+      publicId: { type: String },
     },
   },
   { timestamps: true }
