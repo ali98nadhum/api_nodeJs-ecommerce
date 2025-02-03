@@ -20,6 +20,10 @@ app.use(cors({
 }));
 
 
+// Routes
+app.use("/api/v1/category" , require("./routes/CategoryRoute"));
+
+
 // Run server
 const port = process.env.PORT || 8000;
 app.listen(port , () => console.log(`Server is run on port ${port}`));
