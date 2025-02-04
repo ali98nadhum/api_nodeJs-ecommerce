@@ -52,11 +52,11 @@ module.exports.createCategory = asyncHandler(async (req, res) => {
 // @method DELETE
 // @access private (only admin)
 // ==================================
-module.exports.deleteCategory = asyncHandler(async(req , rea) => {
+module.exports.deleteCategory = asyncHandler(async(req , res) => {
   const category = await CategoryModel.findByIdAndDelete(req.params.id);
   if(!category){
     return res.status(404).json({message: "Category not found"})
   }
 
-  res.status(204).json({message: "Category deleted successfully"})
+  res.json({message: "Category deleted successfully"})
 })
