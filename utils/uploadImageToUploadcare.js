@@ -24,4 +24,23 @@ const uploadImageToUploadcare = async (file) => {
   }
 };
 
-module.exports = { uploadImageToUploadcare };
+
+const deleteImageFromUploadcare = async (publicId) => {
+  try {
+    const deleteUrl = `https://api.uploadcare.com/files/${publicId}/storage/`;
+
+    const response = await axios.delete(deleteUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Uploadcare.Simple ${process.env.UPLOADCARE_PUBLIC_KEY}:${process.env.UPLOADCARE_SECRET_KEY}`,
+      },
+    });
+
+    return { success: true, message: "Image deleted successfully" };
+  } catch (error) {
+    throw new Error("Error deleting image from Uploadcare: " + error.message);
+  }
+};
+
+
+module.exports = { uploadImageToUploadcare , deleteImageFromUploadcare };
