@@ -8,3 +8,9 @@ exports.createCategoryValidator = [
     .isLength({max:100}).withMessage("Too long category title"),
     VaildatorMiddleware,
 ]
+
+
+exports.deleteCategoryValidator = [
+    check("id").isMongoId().withMessage("Invalid category id"),
+    VaildatorMiddleware
+]
