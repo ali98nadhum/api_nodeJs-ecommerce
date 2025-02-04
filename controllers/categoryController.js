@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { CategoryModel } = require("../models/CategoryModel");
-const { uploadImageToUploadcare } = require("../utils/uploadImageToUploadcare");
+const { uploadImageToUploadcare , deleteImageFromUploadcare } = require("../utils/uploadImageToUploadcare");
 
 
 
@@ -44,6 +44,44 @@ module.exports.createCategory = asyncHandler(async (req, res) => {
   res.status(201).json(newCategory);
 });
 
+
+// ==================================
+// @desc Update category
+// @route /api/v1/category/:id
+// @method PUT
+// @access private (only admin)
+// ==================================
+module.exports.updateCategory = asyncHandler(async(req , res) => {
+  const category  = await CategoryModel.findById(req.params.id);
+  if(!category){
+      return res.status(404).json({message: "not found category for this id"});
+  }
+
+   // upload new image
+   let image = category.image;
+   if (req.file) {
+       const { imageUrl, publicId } = await uploadImageToUploadcare(req.file);
+       image = {
+           url:imageUrl ,
+           publicId: publicId,
+       };
+
+       // Delete old image
+       if (category.image.publicId) {
+        await deleteImageFromUploadcare(category.image.publicId);
+       }
+   }
+
+   // Update category in database
+   const updateCategory = await CategoryModel.findByIdAndUpdate(
+    req.params.id,
+    { title: req.body.title , image: image },
+    { new: true }
+)
+
+// send return
+res.status(200).json({data: updateCategory})
+})
 
 
 // ==================================

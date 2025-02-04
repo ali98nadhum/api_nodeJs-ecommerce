@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { createCategory, getAllCategories, deleteCategory } = require("../controllers/categoryController");
+const { createCategory, getAllCategories, deleteCategory, updateCategory } = require("../controllers/categoryController");
 const uploadPhoto = require("../middlewares/uploadPhoto");
-const {createCategoryValidator , deleteCategoryValidator} = require("../utils/vaildators/CategoryVaildators")
+const {createCategoryValidator , deleteCategoryValidator, updateCategoryValidator} = require("../utils/vaildators/CategoryVaildators")
 
 router.route("/")
 .post(uploadPhoto.single("image"),createCategoryValidator ,createCategory)
@@ -9,5 +9,6 @@ router.route("/")
 
 router.route("/:id")
 .delete(deleteCategoryValidator,deleteCategory)
+.put(uploadPhoto.single("image"),updateCategoryValidator ,updateCategory)
 
 module.exports = router;
