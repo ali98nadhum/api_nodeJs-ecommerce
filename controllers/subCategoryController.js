@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { SubCategoryModel } = require("../models/subCategoryModel");
+const { CategoryModel } = require("../models/CategoryModel");
 
 // ==================================
 // @desc Create a new SubCategory
@@ -10,7 +11,14 @@ const { SubCategoryModel } = require("../models/subCategoryModel");
 module.exports.createSubCategory = asyncHandler(async (req, res) => {
   const { title, category } = req.body;
 
-  const newSubCategory = SubCategoryModel({
+  // check if category exists
+  const categoryExists = await CategoryModel.findById(category);
+  if (!categoryExists) {
+    return res.status(404).json({ message: "Category not found" });
+  }
+
+  // create new subcategory
+  const newSubCategory = new SubCategoryModel({
     title,
     category,
   });
