@@ -1,6 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const { CategoryModel } = require("../models/CategoryModel");
-const { uploadImageToUploadcare , deleteImageFromUploadcare } = require("../utils/uploadImageToUploadcare");
+const {
+  uploadImageToUploadcare,
+  deleteImageFromUploadcare,
+} = require("../utils/uploadImageToUploadcare");
 
 
 
@@ -11,10 +14,29 @@ const { uploadImageToUploadcare , deleteImageFromUploadcare } = require("../util
 // @method GET
 // @access public
 // ==================================
-module.exports.getAllCategories = asyncHandler(async(req , res) => {
+module.exports.getAllCategories = asyncHandler(async (req, res) => {
   const categories = await CategoryModel.find({});
-  res.status(200).json({data: categories})
+  res.status(200).json({ data: categories });
+});
+
+
+// ==================================
+// @desc Get Category by id
+// @route /api/v1/category/:id
+// @method GET
+// @access public
+// ==================================
+module.exports.getCategoryById = asyncHandler(async(req , res) => {
+  const category = await CategoryModel.findById(req.params.id);
+  if(!category){
+    return res.status(404).json({ message: "not found category for this id" });
+  }
+
+  res.status(200).json({ data: category})
 })
+
+
+
 
 
 // ==================================
@@ -45,43 +67,47 @@ module.exports.createCategory = asyncHandler(async (req, res) => {
 });
 
 
+
+
 // ==================================
 // @desc Update category
 // @route /api/v1/category/:id
 // @method PUT
 // @access private (only admin)
 // ==================================
-module.exports.updateCategory = asyncHandler(async(req , res) => {
-  const category  = await CategoryModel.findById(req.params.id);
-  if(!category){
-      return res.status(404).json({message: "not found category for this id"});
+module.exports.updateCategory = asyncHandler(async (req, res) => {
+  const category = await CategoryModel.findById(req.params.id);
+  if (!category) {
+    return res.status(404).json({ message: "not found category for this id" });
   }
 
-   // upload new image
-   let image = category.image;
-   if (req.file) {
-       const { imageUrl, publicId } = await uploadImageToUploadcare(req.file);
-       image = {
-           url:imageUrl ,
-           publicId: publicId,
-       };
+  // upload new image
+  let image = category.image;
+  if (req.file) {
+    const { imageUrl, publicId } = await uploadImageToUploadcare(req.file);
+    image = {
+      url: imageUrl,
+      publicId: publicId,
+    };
 
-       // Delete old image
-       if (category.image.publicId) {
-        await deleteImageFromUploadcare(category.image.publicId);
-       }
-   }
+    // Delete old image
+    if (category.image.publicId) {
+      await deleteImageFromUploadcare(category.image.publicId);
+    }
+  }
 
-   // Update category in database
-   const updateCategory = await CategoryModel.findByIdAndUpdate(
+  // Update category in database
+  const updateCategory = await CategoryModel.findByIdAndUpdate(
     req.params.id,
-    { title: req.body.title , image: image },
+    { title: req.body.title, image: image },
     { new: true }
-)
+  );
 
-// send return
-res.status(200).json({data: updateCategory})
-})
+  // send return
+  res.status(200).json({ data: updateCategory });
+});
+
+
 
 
 // ==================================
@@ -90,11 +116,11 @@ res.status(200).json({data: updateCategory})
 // @method DELETE
 // @access private (only admin)
 // ==================================
-module.exports.deleteCategory = asyncHandler(async(req , res) => {
+module.exports.deleteCategory = asyncHandler(async (req, res) => {
   const category = await CategoryModel.findByIdAndDelete(req.params.id);
-  if(!category){
-    return res.status(404).json({message: "Category not found"})
+  if (!category) {
+    return res.status(404).json({ message: "Category not found" });
   }
 
-  res.json({message: "Category deleted successfully"})
-})
+  res.json({ message: "Category deleted successfully" });
+});
