@@ -27,7 +27,7 @@ module.exports.getAllCategories = asyncHandler(async (req, res) => {
 // @access public
 // ==================================
 module.exports.getCategoryById = asyncHandler(async(req , res) => {
-  const category = await CategoryModel.findById(req.params.id);
+  const category = await CategoryModel.findById(req.params.id).populate("subcategories");
   if(!category){
     return res.status(404).json({ message: "not found category for this id" });
   }
