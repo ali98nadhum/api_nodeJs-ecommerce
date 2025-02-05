@@ -123,6 +123,11 @@ module.exports.deleteCategory = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: "Category not found" });
   }
 
+  // delete image from uploadcare
+  if (category.image.publicId) {
+    await deleteImageFromUploadcare(category.image.publicId);
+  }
+
   // delete subCategory
   await SubCategoryModel.deleteMany({ category: category._id });
 
