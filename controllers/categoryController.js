@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { CategoryModel } = require("../models/CategoryModel");
+const {SubCategoryModel} = require("../models/subCategoryModel");
 const {
   uploadImageToUploadcare,
   deleteImageFromUploadcare,
@@ -121,6 +122,9 @@ module.exports.deleteCategory = asyncHandler(async (req, res) => {
   if (!category) {
     return res.status(404).json({ message: "Category not found" });
   }
+
+  // delete subCategory
+  await SubCategoryModel.deleteMany({ category: category._id });
 
   res.json({ message: "Category deleted successfully" });
 });
