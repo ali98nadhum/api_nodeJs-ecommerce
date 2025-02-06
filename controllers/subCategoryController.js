@@ -2,6 +2,19 @@ const asyncHandler = require("express-async-handler");
 const { SubCategoryModel } = require("../models/subCategoryModel");
 const { CategoryModel } = require("../models/CategoryModel");
 
+
+
+// ==================================
+// @desc Get All Sub Categories
+// @route /api/v1/subcategory
+// @method GET
+// @access public
+// ==================================
+module.exports.getAllSubCategories = asyncHandler(async(req , res) => {
+  const subCategory = await SubCategoryModel.find();
+  res.status(200).json({ data: subCategory });
+})
+
 // ==================================
 // @desc Create a new SubCategory
 // @route /api/v1/subcategory
