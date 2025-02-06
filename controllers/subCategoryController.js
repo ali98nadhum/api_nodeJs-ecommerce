@@ -27,3 +27,19 @@ module.exports.createSubCategory = asyncHandler(async (req, res) => {
 
   res.status(201).json(newSubCategory);
 });
+
+
+// ==================================
+// @desc delete SubCategory
+// @route /api/v1/subcategory/:id
+// @method DELETE
+// @access private (only admin)
+// ==================================
+module.exports.deleteSubCategory = asyncHandler(async(req , res) => {
+  const subCategory = await SubCategoryModel.findByIdAndDelete(req.params.id);
+  if(!subCategory){
+    return res.status(404).json({message: "SubCategory not found"})
+  }
+
+  res.status(200).json({ message: "SubCategory deleted successfully" });
+})
