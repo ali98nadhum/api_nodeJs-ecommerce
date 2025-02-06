@@ -26,6 +26,7 @@ exports.updateCategoryValidator = [
     .isMongoId()
     .withMessage("Invalid category id"),
     check("title")
+    .optional()
     .isLength({min:5}).withMessage("Too short category title")
     .isLength({max:100}).withMessage("Too long category title"),
     VaildatorMiddleware,
