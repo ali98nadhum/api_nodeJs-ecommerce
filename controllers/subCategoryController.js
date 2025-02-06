@@ -30,6 +30,36 @@ module.exports.createSubCategory = asyncHandler(async (req, res) => {
 
 
 // ==================================
+// @desc update SubCategory
+// @route /api/v1/subcategory/:id
+// @method PUT
+// @access private (only admin)
+// ==================================
+module.exports.updateSubCategory = asyncHandler(async(req , res) => {
+  const { title, category } = req.body;
+  const {id} = req.params;
+
+  const updateFields = {};
+  if(title) updateFields.title = title;
+  if(category) updateFields.category = category;
+
+  const updatedSubCategory = await SubCategoryModel.findByIdAndUpdate(
+    id,
+    updateFields,
+    { new: true, runValidators: true }
+  );
+
+  if (!updatedSubCategory) {
+    res.status(404);
+    throw new Error('SubCategory not found');
+  }
+
+
+  res.status(200).json({data: updatedSubCategory});
+})
+
+
+// ==================================
 // @desc delete SubCategory
 // @route /api/v1/subcategory/:id
 // @method DELETE
