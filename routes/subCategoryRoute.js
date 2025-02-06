@@ -1,4 +1,4 @@
-const { createSubCategory, deleteSubCategory, updateSubCategory } = require("../controllers/subCategoryController");
+const { createSubCategory, deleteSubCategory, updateSubCategory, getAllSubCategories } = require("../controllers/subCategoryController");
 const { createSubCategoryValidator, deleteSubCategoryValidator, updateSubCategoryValidator } = require("../utils/vaildators/subCategoryVaildators");
 
 const router = require("express").Router();
@@ -6,6 +6,7 @@ const router = require("express").Router();
 
 router.route("/")
 .post(createSubCategoryValidator , createSubCategory)
+.get(getAllSubCategories)
 
 router.route("/:id")
 .delete(deleteSubCategoryValidator , deleteSubCategory)
