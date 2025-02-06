@@ -1,5 +1,5 @@
-const { createSubCategory, deleteSubCategory } = require("../controllers/subCategoryController");
-const { createSubCategoryValidator, deleteSubCategoryValidator } = require("../utils/vaildators/subCategoryVaildators");
+const { createSubCategory, deleteSubCategory, updateSubCategory } = require("../controllers/subCategoryController");
+const { createSubCategoryValidator, deleteSubCategoryValidator, updateSubCategoryValidator } = require("../utils/vaildators/subCategoryVaildators");
 
 const router = require("express").Router();
 
@@ -9,6 +9,7 @@ router.route("/")
 
 router.route("/:id")
 .delete(deleteSubCategoryValidator , deleteSubCategory)
+.put(updateSubCategoryValidator , updateSubCategory)
 
 
 module.exports = router;

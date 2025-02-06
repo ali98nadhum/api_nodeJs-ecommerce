@@ -22,11 +22,11 @@ exports.deleteSubCategoryValidator = [
 
 exports.updateSubCategoryValidator = [
     check("title")
-    .notEmpty().withMessage("title is required")
+    .optional()
     .isLength({min:2}).withMessage("Too short subcategory title")
     .isLength({max:100}).withMessage("Too long subcategory title"),
     check("category")
-    .notEmpty().withMessage("category is required")
+    .optional()
     .isMongoId().withMessage("Invalid category id"),
     VaildatorMiddleware,
 ]
