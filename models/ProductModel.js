@@ -20,10 +20,10 @@ const ProductSchema = new mongoose.Schema(
 
     price: {
       type: Number,
-      required: [true, "Product price is required"],
+      required: [true, "product price is required"],
       trim: true,
-      min: 0,
-      max: [20, "Too long product price"],
+      min: [0, "Price must be greater than or equal to 0"],
+      set: (value) => Math.round(value),
     },
 
     priceAfterDiscount: {
@@ -38,13 +38,13 @@ const ProductSchema = new mongoose.Schema(
     },
 
     productCode: {
-      type: Number,
+      type: String,
       required: [true, "Product code is required"],
       trim: true,
     },
 
     imageCover: {
-      url: { type: String, required: [true, "Image cover is required"] },
+      url: { type: String},
       publicId: { type: String },
     },
 

@@ -23,6 +23,7 @@ app.use(cors({
 // Routes
 app.use("/api/v1/category" , require("./routes/CategoryRoute"));
 app.use("/api/v1/subcategory" , require("./routes/subCategoryRoute"));
+app.use("/api/v1/products" , require("./routes/productRoute"));
 
 
 // Run server
