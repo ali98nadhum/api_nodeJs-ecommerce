@@ -2,6 +2,13 @@ const { check } = require("express-validator");
 const VaildatorMiddleware = require("../../middlewares/vaildatorMiddleware");
 
 
+
+exports.getOneSubCategoryValidator = [
+    check("id").isMongoId().withMessage("Invalid subcategory id"),
+    VaildatorMiddleware
+]
+
+
 exports.createSubCategoryValidator = [
     check("title")
     .notEmpty().withMessage("title is required")
