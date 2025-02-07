@@ -24,7 +24,7 @@ module.exports.getAllSubCategories = asyncHandler(async(req , res) => {
 // @access public
 // ==================================
 module.exports.getSubCategoryById = asyncHandler(async(req , res) => {
-  const {id} = req.params.id;
+  const id = req.params.id;
   const subCategory = await SubCategoryModel.findById(id);
   if(!subCategory){
     return res.status(404).json({ message: "Subcategory not found" });
@@ -84,8 +84,7 @@ module.exports.updateSubCategory = asyncHandler(async(req , res) => {
   );
 
   if (!updatedSubCategory) {
-    res.status(404);
-    throw new Error('SubCategory not found');
+    res.status(404).json({message: "SubCategory not found"})
   }
 
 
