@@ -15,6 +15,27 @@ module.exports.getAllSubCategories = asyncHandler(async(req , res) => {
   res.status(200).json({ data: subCategory });
 })
 
+
+
+// ==================================
+// @desc Get SubCategory by id
+// @route /api/v1/subcategory/:id
+// @method GET
+// @access public
+// ==================================
+module.exports.getSubCategoryById = asyncHandler(async(req , res) => {
+  const {id} = req.params.id;
+  const subCategory = await SubCategoryModel.findById(id);
+  if(!subCategory){
+    return res.status(404).json({ message: "Subcategory not found" });
+  }
+
+  res.status(200).json({ data: subCategory });
+})
+
+
+
+
 // ==================================
 // @desc Create a new SubCategory
 // @route /api/v1/subcategory
