@@ -25,7 +25,7 @@ module.exports.getAllSubCategories = asyncHandler(async(req , res) => {
 // ==================================
 module.exports.getSubCategoryById = asyncHandler(async(req , res) => {
   const id = req.params.id;
-  const subCategory = await SubCategoryModel.findById(id);
+  const subCategory = await SubCategoryModel.findById(id).populate("products");
   if(!subCategory){
     return res.status(404).json({ message: "Subcategory not found" });
   }
