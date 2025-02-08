@@ -1,10 +1,11 @@
-const { createProduct } = require("../controllers/productController");
+const { createProduct, getProducts } = require("../controllers/productController");
 const { createProductValidator } = require("../utils/vaildators/productVaildators");
 
 const router = require("express").Router();
 
 
 router.route("/")
+.get(getProducts)
 .post(createProductValidator,createProduct)
 
 
