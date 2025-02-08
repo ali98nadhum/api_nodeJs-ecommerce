@@ -21,6 +21,7 @@ module.exports.getAllCategories = asyncHandler(async (req, res) => {
 });
 
 
+
 // ==================================
 // @desc Get Category by id
 // @route /api/v1/category/:id
