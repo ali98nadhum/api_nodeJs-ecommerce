@@ -10,7 +10,6 @@ const uploadImageToUploadcare = async (file) => {
   formData.append("file", file.buffer, { filename: file.originalname });
 
   try {
-    // رفع الصورة إلى Uploadcare
     const uploadResponse = await axios.post("https://upload.uploadcare.com/base/", formData, {
       headers: { ...formData.getHeaders() },
     });
