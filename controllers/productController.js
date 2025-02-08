@@ -3,6 +3,17 @@ const { ProductModel } = require("../models/ProductModel");
 
 
 
+// ==================================
+// @desc Get All Product
+// @route /api/v1/products
+// @method GET
+// @access public
+// ==================================
+module.exports.getProducts = asyncHandler(async(req , res) => {
+    const products = await ProductModel.find();
+    res.status(200).json({ data: products });
+})
+
 
 // ==================================
 // @desc Create a new Product
