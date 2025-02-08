@@ -18,6 +18,7 @@ const CategorySchema = new mongoose.Schema(
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
+
 // for get subcategory
 CategorySchema.virtual("subcategories", {
   ref: "SubCategoryModel", 
