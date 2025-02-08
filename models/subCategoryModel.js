@@ -24,7 +24,7 @@ const SubCategorySchema = new mongoose.Schema(
 SubCategorySchema.virtual("products", {
   ref: "ProductModel", 
   localField: "_id", 
-  foreignField: "product",
+  foreignField: "SubCategory",
 });
 
 const SubCategoryModel = mongoose.model("SubCategoryModel", SubCategorySchema);
