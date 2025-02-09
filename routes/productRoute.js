@@ -1,5 +1,5 @@
 const { createProduct, getProducts, deleteProduct } = require("../controllers/productController");
-const { createProductValidator } = require("../utils/vaildators/productVaildators");
+const { createProductValidator, deleteProductValidator } = require("../utils/vaildators/productVaildators");
 
 const router = require("express").Router();
 
@@ -9,7 +9,7 @@ router.route("/")
 .post(createProductValidator,createProduct)
 
 router.route("/:id")
-.delete(deleteProduct)
+.delete( deleteProductValidator , deleteProduct)
 
 
 module.exports = router;
