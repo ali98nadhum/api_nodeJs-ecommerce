@@ -22,6 +22,23 @@ module.exports.getProducts = asyncHandler(async (req, res) => {
 
 
 
+// ==================================
+// @desc Get product by Id
+// @route /api/v1/products/:id
+// @method GET
+// @access public
+// ==================================
+module.exports.getProductById = asyncHandler(async(req , res) => {
+  const product = await ProductModel.findById(req.params.id);
+  if(!product){
+    return res.status(404).json({message: 'Product not found'})
+  }
+
+  res.status(200).json({ data: product });
+})
+
+
+
 
 
 // ==================================
