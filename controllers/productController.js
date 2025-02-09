@@ -12,8 +12,12 @@ const { ProductModel } = require("../models/ProductModel");
 // @access public
 // ==================================
 module.exports.getProducts = asyncHandler(async (req, res) => {
-  const products = await ProductModel.find();
-  res.status(200).json({ data: products });
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit * 8 || 8;
+  const skip = (page-1) * limit;
+  const products = await ProductModel.find().skip(skip).limit(limit);
+  const totalProducts = await ProductModel.countDocuments();
+  res.status(200).json({totalProducts, page, data: products });
 });
 
 
