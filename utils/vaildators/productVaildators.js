@@ -61,3 +61,9 @@ exports.deleteProductValidator = [
   check("id").isMongoId().withMessage("Invalid product id"),
   VaildatorMiddleware,
 ]
+
+
+exports.getOneProductValidator = [
+  check("id").isMongoId().withMessage("Invalid product id"),
+  VaildatorMiddleware,
+]
