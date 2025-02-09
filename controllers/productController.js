@@ -14,12 +14,15 @@ const { ProductModel } = require("../models/ProductModel");
 module.exports.getProducts = asyncHandler(async (req, res) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 8 || 8;
-  const skip = (page-1) * limit;
-  const sortBy = req.query.sort || 'createdAt'; 
-  const order = req.query.order === 'asc' ? 1 : -1;
-  const products = await ProductModel.find().skip(skip).limit(limit).sort({ [sortBy]: order });
+  const skip = (page - 1) * limit;
+  const sortBy = req.query.sort || "createdAt";
+  const order = req.query.order === "asc" ? 1 : -1;
+  const products = await ProductModel.find()
+    .skip(skip)
+    .limit(limit)
+    .sort({ [sortBy]: order });
   const totalProducts = await ProductModel.countDocuments();
-  res.status(200).json({totalProducts, page, data: products });
+  res.status(200).json({ totalProducts, page, data: products });
 });
 
 
