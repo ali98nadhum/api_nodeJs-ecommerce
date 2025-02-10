@@ -14,6 +14,7 @@ const {
   getOneCategoryValidator,
 } = require("../utils/vaildators/CategoryVaildators");
 
+
 router.route("/")
   .post(uploadPhoto.single("image"), createCategoryValidator, createCategory)
   .get(getAllCategories);
