@@ -27,6 +27,7 @@ module.exports.getProducts = asyncHandler(async (req, res) => {
 
 
 
+
 // ==================================
 // @desc Get product by Id
 // @route /api/v1/products/:id
