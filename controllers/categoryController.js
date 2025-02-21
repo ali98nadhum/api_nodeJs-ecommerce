@@ -34,6 +34,7 @@ module.exports.getCategoryById = asyncHandler(async(req , res) => {
     return res.status(404).json({ message: "not found category for this id" });
   }
 
+  
   res.status(200).json({ data: category})
 })
 
