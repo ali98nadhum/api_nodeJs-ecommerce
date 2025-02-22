@@ -25,4 +25,5 @@ router.route("/:id")
   .put(uploadPhoto.single("image"), updateCategoryValidator, updateCategory);
 
   
+  
 module.exports = router;
