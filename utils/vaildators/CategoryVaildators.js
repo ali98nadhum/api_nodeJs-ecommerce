@@ -10,8 +10,6 @@ exports.createCategoryValidator = [
 ]
 
 
-
-
 exports.getOneCategoryValidator = [
     check("id").isMongoId().withMessage("Invalid category id"),
     VaildatorMiddleware
