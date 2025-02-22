@@ -24,7 +24,5 @@ router.route("/:id")
   .delete(deleteCategoryValidator, deleteCategory)
   .put(uploadPhoto.single("image"), updateCategoryValidator, updateCategory);
 
-  
 
-  
 module.exports = router;
