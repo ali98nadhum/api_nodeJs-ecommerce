@@ -10,5 +10,5 @@ const asyncHandler = require("express-async-handler");
 // @access public
 // ==================================
 module.exports.register = asyncHandler(async(req , res) => {
-    
+    const {name , username , password , email} = req.body;
 })

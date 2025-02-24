@@ -26,6 +26,14 @@ const UserSchema = new mongoose.Schema(
             minlength: [8 , "password must be at least 8 characters"],
         },
 
+        email: {
+            type: String,
+            required: [true , "Email is required"],
+            trim: true,
+            unique: [true , 'email must be unique'],
+            match: [/\S+@\S+\.\S+/, 'Please enter a valid email']
+        },
+
         imageCover: {
             url: {type:String},
             publicId: {type:String},
