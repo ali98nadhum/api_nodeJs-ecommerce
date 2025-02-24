@@ -16,7 +16,7 @@ module.exports.register = asyncHandler(async(req , res) => {
 
 
     // hash password
-    const hashedPassword = await hashPassword(req.body.password);
+    const hashedPassword = await hashPassword(password);
 
     // Create new user
   const newUser = new UserModel({
