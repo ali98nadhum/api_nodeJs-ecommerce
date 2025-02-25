@@ -13,6 +13,7 @@ const {
   updateCategoryValidator,
   getOneCategoryValidator,
 } = require("../utils/vaildators/CategoryVaildators");
+const AuthService = require("../utils/AuthService");
 
 
 router.route("/")
@@ -21,7 +22,7 @@ router.route("/")
 
 router.route("/:id")
   .get(getOneCategoryValidator, getCategoryById)
-  .delete(deleteCategoryValidator, deleteCategory)
+  .delete(AuthService.protect,deleteCategoryValidator, deleteCategory)
   .put(uploadPhoto.single("image"), updateCategoryValidator, updateCategory);
 
 
