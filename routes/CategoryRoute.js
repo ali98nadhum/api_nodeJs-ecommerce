@@ -23,7 +23,7 @@ router.route("/")
 router.route("/:id")
   .get(getOneCategoryValidator, getCategoryById)
   .delete(AuthService.protect,deleteCategoryValidator, deleteCategory)
-  .put(uploadPhoto.single("image"), updateCategoryValidator, updateCategory);
+  .put(AuthService.protect,uploadPhoto.single("image"), updateCategoryValidator, updateCategory);
 
 
   
