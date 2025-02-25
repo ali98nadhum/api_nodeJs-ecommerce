@@ -16,6 +16,7 @@ const {
 const AuthService = require("../utils/AuthService");
 
 
+
 router.route("/")
   .post(AuthService.protect,uploadPhoto.single("image"), createCategoryValidator, createCategory)
   .get(getAllCategories);
