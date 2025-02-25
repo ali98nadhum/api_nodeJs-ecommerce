@@ -17,7 +17,7 @@ const AuthService = require("../utils/AuthService");
 
 
 router.route("/")
-  .post(uploadPhoto.single("image"), createCategoryValidator, createCategory)
+  .post(AuthService.protect,uploadPhoto.single("image"), createCategoryValidator, createCategory)
   .get(getAllCategories);
 
 router.route("/:id")
