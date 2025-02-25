@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { UserModel } = require("../models/UserModel");
 const { hashPassword } = require("../helper/hashPassword");
 const { generateToken } = require("../utils/generateToken");
+const bcrypt = require("bcryptjs");
 
 
 
@@ -66,10 +67,10 @@ module.exports.login = asyncHandler(async(req , res) => {
 
    // Generate a JWT token for a user.
    const token = generateToken(
-    newUser.id,
-    newUser.username,
-    newUser.name,
-    newUser.role
+    user.id,
+    user.username,
+    user.name,
+    user.role
   );
 
   res.status(200).json({message:`login_success hi ${user.username}` , token:token});
