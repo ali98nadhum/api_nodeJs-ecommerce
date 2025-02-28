@@ -82,7 +82,31 @@ module.exports.login = asyncHandler(async(req , res) => {
 
 // ==================================
 // @desc change password to current user
-// @route /api/v1/auth/register
+// @route /api/v1/auth/changePassword/:id
 // @method POST 
-// @access public
+// @access private (only user logged in)
 // ==================================
+module.exports.changePassword = asyncHandler(async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+
+  // 1- البحث عن المستخدم من خلال `req.user.id`
+  const user = await UserModel.findById(req.user.id);
+  if (!user) {
+      return res.status(404).json({ message: "User not found" });
+  }
+
+  // 2- التحقق من صحة كلمة المرور القديمة
+  const isMatch = await bcrypt.compare(oldPassword, user.password);
+  if (!isMatch) {
+      return res.status(400).json({ message: "Old password is incorrect" });
+  }
+
+  // 3- تشفير كلمة المرور الجديدة
+  const hashedPassword = await hashPassword(newPassword);
+
+  // 4- تحديث كلمة المرور
+  user.password = hashedPassword;
+  await user.save();
+
+  res.status(200).json({ message: "Password changed successfully" });
+});
