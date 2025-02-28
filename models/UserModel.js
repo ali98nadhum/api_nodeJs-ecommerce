@@ -45,6 +45,8 @@ const UserSchema = new mongoose.Schema(
             default: 'user'
         },
 
+        phone:String,
+
         passwordChangeAt:Date
     }
 )

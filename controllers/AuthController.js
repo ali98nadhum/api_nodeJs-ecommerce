@@ -75,3 +75,13 @@ module.exports.login = asyncHandler(async(req , res) => {
 
   res.status(200).json({message:`login_success hi ${user.username}` , token:token});
 })
+
+
+
+
+// ==================================
+// @desc change password to current user
+// @route /api/v1/auth/register
+// @method POST 
+// @access public
+// ==================================
