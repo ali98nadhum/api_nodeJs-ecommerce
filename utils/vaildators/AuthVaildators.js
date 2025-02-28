@@ -43,6 +43,10 @@ exports.registerValidator = [
       }
     }),
 
+    check("phone")
+    .isMobilePhone(["ar-IQ"]).withMessage("invalid phone number")
+    .optional(),
+
   VaildatorMiddleware,
 ];
 
