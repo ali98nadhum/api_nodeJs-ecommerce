@@ -14,7 +14,7 @@ const bcrypt = require("bcryptjs");
 // @access public
 // ==================================
 module.exports.register = asyncHandler(async (req, res) => {
-  const { name, username, password, email } = req.body;
+  const { name, username, password, email , phone } = req.body;
 
   // hash password
   const hashedPassword = await hashPassword(password);
@@ -24,6 +24,7 @@ module.exports.register = asyncHandler(async (req, res) => {
     name,
     username,
     email,
+    phone,
     password: hashedPassword,
   });
 
