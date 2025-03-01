@@ -47,7 +47,6 @@ const UserSchema = new mongoose.Schema(
 
         phone:String,
 
-        
         passwordChangeAt:Date
     }
 )
