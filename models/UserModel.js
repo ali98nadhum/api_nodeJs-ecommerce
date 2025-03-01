@@ -52,7 +52,6 @@ const UserSchema = new mongoose.Schema(
 )
 
 
-
 const UserModel = mongoose.model("UserModel" , UserSchema);
 
 module.exports = {
