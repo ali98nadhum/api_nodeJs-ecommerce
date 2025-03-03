@@ -108,3 +108,12 @@ module.exports.changePassword = asyncHandler(async (req, res) => {
 
   res.status(200).json({ message: "Password changed successfully" });
 });
+
+
+
+// ==================================
+// @desc Forget password
+// @route /api/v1/auth/forgetPassword
+// @method POST 
+// @access private (only user logged in)
+// ==================================
