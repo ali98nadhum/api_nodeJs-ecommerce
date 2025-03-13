@@ -117,7 +117,3 @@ module.exports.changePassword = asyncHandler(async (req, res) => {
 // @method POST 
 // @access private (only user logged in)
 // ==================================
-
-
-
-
