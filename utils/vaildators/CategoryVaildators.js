@@ -21,6 +21,7 @@ exports.deleteCategoryValidator = [
     VaildatorMiddleware
 ]
 
+
 exports.updateCategoryValidator = [
     check("id")
     .isMongoId()
