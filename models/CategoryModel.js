@@ -28,6 +28,7 @@ CategorySchema.virtual("subcategories", {
 
 const CategoryModel = mongoose.model("CategoryModel", CategorySchema);
 
+
 module.exports = {
   CategoryModel,
 };
