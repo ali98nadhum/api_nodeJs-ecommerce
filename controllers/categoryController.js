@@ -135,3 +135,4 @@ module.exports.deleteCategory = asyncHandler(async (req, res) => {
 
   res.json({ message: "Category deleted successfully" });
 });
+
