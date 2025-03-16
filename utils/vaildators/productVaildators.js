@@ -2,6 +2,7 @@ const { check } = require("express-validator");
 const VaildatorMiddleware = require("../../middlewares/vaildatorMiddleware");
 const { SubCategoryModel } = require("../../models/subCategoryModel");
 
+
 exports.createProductValidator = [
   check("title")
     .isString()
